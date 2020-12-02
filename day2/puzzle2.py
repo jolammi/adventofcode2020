@@ -38,4 +38,4 @@ if __name__ == "__main__":
         print(f"The number of correct passwords in the input file is {str(correct)}")
     except Exception:
         print("Please learn how to code")
-        traceback.print_exc
+        traceback.print_exc()
