@@ -2,11 +2,13 @@ import re
 import traceback
 regex = re.compile(r"([0-9]+)-([0-9]+) ([a-z]): ([a-zA-Z]+)")
 
+
 def read_data():
     with open("input.txt", "r") as handle:
         data = handle.readlines()
         data = [i.strip("\n") for i in data]
     return data
+
 
 def parse_data(data):
     num_correct = 0
@@ -14,11 +16,12 @@ def parse_data(data):
         password = row_data["password"]
         letter = row_data["letter"]
         # Below the XOR operator: A or B but not both
-        if ((password[row_data["first_index"]] == letter) is not \
+        if ((password[row_data["first_index"]] == letter) is not
                 (password[row_data["second_index"]] == letter)):
             num_correct += 1
 
     return num_correct
+
 
 def _split_to_rows(data):
     for row in data:
@@ -30,6 +33,7 @@ def _split_to_rows(data):
             "password": match.group(4),
         }
         yield row_data
+
 
 if __name__ == "__main__":
     try:
