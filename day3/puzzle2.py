@@ -42,7 +42,7 @@ if __name__ == "__main__":
         for right, down in RIGHT_AND_DOWN:
             totals.append(parse_trees(data, right, down))
             print(f"The number of trees encountered on loop {right} right, {down} down is {totals[-1]}")
-        print(f"Answer to the queestion, multiplication of trees, is {reduce(lambda x, y: x*y, totals)}")
+        print(f"Answer to the question, multiplication of trees, is {reduce(lambda x, y: x*y, totals)}")
     except Exception:
         print("Please learn how to code")
         traceback.print_exc()
