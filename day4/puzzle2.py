@@ -57,7 +57,7 @@ def passport_fields_are_valid(dic):
         "hcl": {
             "firstchar": "#",
             "length": 7,
-            "accepted": "abcdefghijklmnopqrstuvwzx1234567890"
+            "accepted": "abcdefghijklmnopqrstuvwxyz1234567890"
         },
         "ecl": {
             "accepted": ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]

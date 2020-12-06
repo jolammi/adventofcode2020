@@ -59,8 +59,6 @@ if __name__ == "__main__":
     try:
         data = read_data()
         highest = parse_highest_index(data)
-        # print(data)
-        # valid = parse_passports(data)
         print(f"The highest index in the data is {highest}")
     except Exception:
         print("Please learn how to code")
