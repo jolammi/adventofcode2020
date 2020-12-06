@@ -94,10 +94,8 @@ def hgt_is_valid(dic, rules):
     hgt = dic["hgt"]
     hgt_rules = rules["hgt"]
     if not hgt.endswith(tuple(rules["hgt"]["endings"])):
-        print(1)
         return False
     if (hgt.endswith("cm") and not hgt_rules["cm_min"] <= int(hgt.strip("cm")) <= hgt_rules["cm_max"]):
-        print(2)
         return False
     if (hgt.endswith("in") and not hgt_rules["in_min"] <= int(hgt.strip("in")) <= hgt_rules["in_max"]):
         return False
