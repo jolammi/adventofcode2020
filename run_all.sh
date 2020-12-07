@@ -1,5 +1,6 @@
 echo "This script runs all the days in order. It helps to check whether all the solutions work."
 
+cd aoc
 for i in {1..24}
 do
     if [ -d "day$i" ]
@@ -13,3 +14,4 @@ do
         cd ..
     fi
 done
+cd ..
