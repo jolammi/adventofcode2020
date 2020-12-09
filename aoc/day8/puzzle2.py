@@ -20,20 +20,16 @@ def iterate_change(data):
             prog_input[idx][0] = "jmp"
         retval = run_program(prog_input)
         if retval:
-            assert retval == 2092
             return retval
 
 
 def run_program(data):
     accumulator = 0
     idx = 0
-    done_action_indexes = []
-    while True:
+    done_action_indexes = set()
+    while idx not in done_action_indexes:
+        done_action_indexes.add(idx)
         try:
-            if idx in done_action_indexes:
-                return None
-            else:
-                done_action_indexes.append(idx)
             action = data[idx][0]
             if action == "acc":
                 accumulator += data[idx][1]
@@ -44,12 +40,14 @@ def run_program(data):
                 idx += 1
         except IndexError:
             return accumulator
+    return None
 
 
 if __name__ == "__main__":
     try:
         data = read_data()
         acc_val = iterate_change(data)
+        assert acc_val == 2092
         print(f"The value of the accumulator when the program terminater normally is {acc_val}")
     except Exception:
         print("Please learn how to code")
