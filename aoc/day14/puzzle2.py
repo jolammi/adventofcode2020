@@ -1,5 +1,5 @@
-"""TODO: Implement puzzle2"""
 import traceback
+import itertools
 import re
 
 
@@ -32,14 +32,26 @@ class Program:
 
     def save_value(self, matches):
         # TODO: This would be way wiser to do with bitwise operations. Please implement.
-        value_to_save = list(format(int(matches.group(2)), "036b"))
+        mem_adress_list = list(format(int(matches.group(1)), "036b"))
         mask = list(self.mask)
-        for index, (value_bit, mask_bit) in enumerate(zip(value_to_save, mask)):
+        for index, (mem_adress_bit, mask_bit) in enumerate(zip(mem_adress_list, mask)):
             if mask_bit == "1":
-                value_to_save[index] = "1"
+                mem_adress_list[index] = "1"
             if mask_bit == "0":
-                value_to_save[index] = "0"
-        self.memory[matches.group(1)] = int("".join(value_to_save), 2)
+                pass  # just a reminder for no operation on 0
+            if mask_bit == "X":
+                mem_adress_list[index] = "X"
+        for address in self._parse_mem_adresses(mem_adress_list):
+            self.memory[address] = int(matches.group(2))
+
+    def _parse_mem_adresses(self, mem_adress_list):
+        floating_indexes = [i for i, x in enumerate(mem_adress_list) if x == "X"]
+        bits = list(itertools.product([0, 1], repeat=mem_adress_list.count("X")))
+        for bit_tuple in bits:
+            mem_adress_copy = mem_adress_list.copy()
+            for bit_char, floating_index in zip(bit_tuple, floating_indexes):
+                mem_adress_copy[floating_index] = str(bit_char)
+            yield "".join(mem_adress_copy)
 
 
 def read_data():
@@ -54,7 +66,7 @@ if __name__ == "__main__":
         program = Program(data)
         program.run_program()
         values_sum = sum(program.memory.values())
-        assert values_sum == 18630548206046
+        assert values_sum == 4254673508445
         print(f"The sum of all values left in memory after completion is {values_sum}")
     except Exception:
         print("Please learn how to code")
